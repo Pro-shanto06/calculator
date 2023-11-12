@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     let operationDisplay = document.getElementById('operation');
     let typedDisplay = document.getElementById('typed');
-   
+    let buttons = document.getElementById('buttons');
+
   
     buttons.addEventListener('click', function (e) {
       if (e.target.matches('.button')) {
@@ -17,11 +18,14 @@ document.addEventListener('DOMContentLoaded', function () {
         case '=':
           calculate();
           break;
+        case '%':
+          handlePercentage();
+          break;
         default:
           appendToDisplay(value);
       }
     }
-  
+    
     function appendToDisplay(value) {
       typedDisplay.textContent += value;
     }
@@ -34,6 +38,13 @@ document.addEventListener('DOMContentLoaded', function () {
     function calculate() {  
         operationDisplay.textContent = typedDisplay.textContent;
         typedDisplay.textContent = eval(typedDisplay.textContent); 
+    }
+
+    function handlePercentage() {
+     
+        let expression = typedDisplay.textContent;
+        let result = eval(expression) / 100;
+        typedDisplay.textContent = result;
     }
   });
   
